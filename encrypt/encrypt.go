@@ -5,12 +5,12 @@ import (
 	"crypto/sha1"
 	"encoding/base32"
 	"strings"
+	"time"
 
 	"github.com/HaleLu/go-authenticator/util"
 )
 
-// GetCode hash timestamp with secret into a six-digit number as the auth code.
-func GetCode(secret string, timestamp int64) (code uint32, err error) {
+func getCode(secret string, timestamp int64) (code uint32, err error) {
 	var key, value []byte
 	secret = strings.ToUpper(strings.Replace(secret, " ", "", -1))
 	key, err = base32.StdEncoding.DecodeString(secret)
@@ -31,4 +31,14 @@ func GetCode(secret string, timestamp int64) (code uint32, err error) {
 	}
 	code = code % 1000000
 	return
+}
+
+// GetCodeNow hash now timestamp with secret into a six-digit number as the auth code.
+func GetCodeNow(secret string) (code uint32, err error) {
+	return getCode(secret, time.Now().Unix())
+}
+
+// GetCode hash timestamp with secret into a six-digit number as the auth code.
+func GetCode(secret string, timestamp int64) (code uint32, err error) {
+	return getCode(secret, timestamp)
 }
