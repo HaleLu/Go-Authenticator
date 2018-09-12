@@ -10,7 +10,7 @@ import (
 func Test_GetCode(t *testing.T) {
 	Convey("test GetCode", t, func() {
 		now := time.Now().Unix()
-		code, err := GetCode("somethingfortest", now)
+		code, err := GetCode("0G6969V5CVN09JKQ", now)
 		So(err, ShouldBeNil)
 		So(code, ShouldBeGreaterThanOrEqualTo, 0)
 	})

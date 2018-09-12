@@ -30,9 +30,9 @@ func Test_BytesToUint32(t *testing.T) {
 	})
 }
 
-func Test_RandomString(t *testing.T) {
-	Convey("test RandomString", t, func() {
-		s := RandomString(20)
-		So(len(s), ShouldEqual, 20)
+func Test_RandomBase32String(t *testing.T) {
+	Convey("test RandomBase32String", t, func() {
+		s := RandomBase32String()
+		So(len(s), ShouldEqual, 16)
 	})
 }

@@ -34,16 +34,20 @@ func BytesToUint32(bytes []byte) (value uint32, err error) {
 	return
 }
 
-// RandomChar generates a random character
-func RandomChar() byte {
-	return byte(_rand.Intn(256))
+// randomBase32Char generates a random base32 character
+func randomBase32Char() byte {
+	r := _rand.Intn(32)
+	if r < 26 {
+		return 'A' + byte(r)
+	}
+	return '2' + byte(r) - 26
 }
 
-// RandomBytes generates a random byte array
-func RandomBytes(length int) []byte {
-	bs := make([]byte, length)
+// RandomBase32String generates a random base32 string
+func RandomBase32String() string {
+	bs := make([]byte, 16)
 	for i := range bs {
-		bs[i] = RandomChar()
+		bs[i] = randomBase32Char()
 	}
-	return bs
+	return string(bs)
 }

@@ -1,7 +1,6 @@
 package qrcode
 
 import (
-	"encoding/base32"
 	"errors"
 
 	"github.com/HaleLu/go-authenticator/util"
@@ -10,21 +9,15 @@ import (
 )
 
 // GetQR generates a byte array which present an auth uri png.
-func GetQR(provider, user string, key []byte) (png []byte, err error) {
-	var (
-		secret string
-		uri    string
-	)
-	if len(key) != 20 {
-		err = errors.New("length of key must be 20")
+func GetQR(provider, user, secret string) (png []byte, err error) {
+	if len(secret) != 16 {
+		err = errors.New("length of secret must be 20")
 	}
-	secret = base32.StdEncoding.EncodeToString(key)
-	uri = GetURI(provider, user, secret)
-	png, err = xqrcode.Encode(uri, xqrcode.Medium, 256)
+	png, err = xqrcode.Encode(GetURI(provider, user, secret), xqrcode.Medium, 256)
 	return
 }
 
 // RandomKey generates a random 160-bits key
-func RandomKey() []byte {
-	return util.RandomBytes(20)
+func RandomKey() string {
+	return util.RandomBase32String()
 }
