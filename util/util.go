@@ -22,14 +22,14 @@ func Int64ToBytes(value int64) (bytes []byte) {
 	return
 }
 
-// BytesToUint32 converts []byte to uint32
-func BytesToUint32(bytes []byte) (value uint32, err error) {
+// BytesToInt converts []byte to int
+func BytesToInt(bytes []byte) (value int, err error) {
 	if len(bytes) != 4 {
 		err = errors.New("length of bytes must be 4")
 	}
 	for i := 0; i < 4; i++ {
 		value = value << 8
-		value += uint32(bytes[i])
+		value += int(bytes[i])
 	}
 	return
 }

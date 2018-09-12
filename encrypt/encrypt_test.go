@@ -12,6 +12,6 @@ func Test_GetCode(t *testing.T) {
 		now := time.Now().Unix()
 		code, err := GetCode("0G6969V5CVN09JKQ", now)
 		So(err, ShouldBeNil)
-		So(code, ShouldBeGreaterThanOrEqualTo, 0)
+		So(code, ShouldBeBetweenOrEqual, 0, 999999)
 	})
 }
