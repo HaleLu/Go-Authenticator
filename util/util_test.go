@@ -29,3 +29,10 @@ func Test_BytesToUint32(t *testing.T) {
 		So(i, ShouldEqual, 0x12345678)
 	})
 }
+
+func Test_RandomString(t *testing.T) {
+	Convey("test RandomString", t, func() {
+		s := RandomString(20)
+		So(len(s), ShouldEqual, 20)
+	})
+}

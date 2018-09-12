@@ -1,6 +1,16 @@
 package util
 
-import "errors"
+import (
+	"errors"
+	"math/rand"
+	"time"
+)
+
+var _rand *rand.Rand
+
+func init() {
+	_rand = rand.New(rand.NewSource(time.Now().Unix()))
+}
 
 // Int64ToBytes converts int64 to []byte
 func Int64ToBytes(value int64) (bytes []byte) {
@@ -22,4 +32,18 @@ func BytesToUint32(bytes []byte) (value uint32, err error) {
 		value += uint32(bytes[i])
 	}
 	return
+}
+
+// RandomChar generates a random character
+func RandomChar() byte {
+	return byte(_rand.Intn(256))
+}
+
+// RandomBytes generates a random byte array
+func RandomBytes(length int) []byte {
+	bs := make([]byte, length)
+	for i := range bs {
+		bs[i] = RandomChar()
+	}
+	return bs
 }
